@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione Persone Scomparse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registrazione Persona Scomparsa</h2>
+    <form id="personaForm">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+        </div>
+        <div class="form-group">
+            <label for="cognome">Cognome:</label>
+            <input type="text" id="cognome" name="cognome" required>
+        </div>
+        <div class="form-group">
+            <label for="eta">Età:</label>
+            <input type="number" id="eta" name="eta" required>
+        </div>
+        <div class="form-group">
+            <label for="ultimaPosizione">Ultima Posizione Conosciuta:</label>
+            <input type="text" id="ultimaPosizione" name="ultimaPosizione" required>
+        </div>
+        <button type="button" onclick="salvaPersona()">Salva</button>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script>
+    function salvaPersona() {
+        var nome = document.getElementById('nome').value;
+        var cognome = document.getElementById('cognome').value;
+        var eta = document.getElementById('eta').value;
+        var ultimaPosizione = document.getElementById('ultimaPosizione').value;
+
+        var dati = `Nome: ${nome}\nCognome: ${cognome}\nEtà: ${eta}\nUltima Posizione Conosciuta: ${ultimaPosizione}\n--------------------------\n`;
+
+        var blob = new Blob([dati], { type: "text/plain;charset=utf-8" });
+        saveAs(blob, "persone_scomparse.txt");
+
+        document.getElementById('personaForm').reset();
+        alert("Anagrafica salvata correttamente su file.");
+    }
+</script>
+
+</body>
+</html>
